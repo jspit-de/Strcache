@@ -1,6 +1,26 @@
 # Strcache
 PHP Cache Class
 
+## Usage
+
+```php
+require '/yourpath/Strcache.php';
+
+$url="https://xxxx";
+
+$fctNewRequest = function() use ($url){
+  return @file_get_contents($url);
+};
+
+/*
+If the cache is older than 5 minutes, the user function is called to update the cache. 
+In the other case, the content is taken from the cache file.
+*/
+$strContent = strCache::create($fctNewRequest,'cachefile.dat')->getContent("5 Min");
+
+
+```
+
 ## Class-Info
 
 | Info | Value |
@@ -35,4 +55,3 @@ PHP Cache Class
 |  const CACHE_NORMAL = 2; | 2 |   |
 |  const CACHE_OLD = 3; //$fct was called with error | 3 |  $fct was called with error  |
 |  const CACHE_ERROR = 4; | 4 |   |
-
